@@ -115,8 +115,10 @@ the flattened PNG to this repo and passes its raw URL to the issue. Two requirem
   git push origin uploads
   git checkout main
   ```
-  In the Cloudflare Pages project, set the **production branch to `main`** so only `main`
-  builds. Images (max 6 MB) land under `uploads/YYYY/MM/`.
+  In the Cloudflare Pages project, set the **production branch to `main`**, and under
+  **Settings → Builds → Branch control** turn on preview deployments for every branch
+  except `uploads`. Pull requests then get a preview link, while screenshot uploads never
+  trigger a build. Images (max 6 MB) land under `uploads/YYYY/MM/`.
 
 ### Spam protection (recommended)
 A honeypot field is built in. To add Cloudflare Turnstile: create a widget in the
