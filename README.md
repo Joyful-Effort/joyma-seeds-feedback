@@ -49,7 +49,8 @@ lotus-seeds-feedback/
 ├── public/
 │   ├── index.html            # feedback form (served at /)
 │   ├── centres.html          # centre sign-up form (served at /centres)
-│   └── annotator.js          # Fabric.js screenshot annotator (box/arrow/text/pen)
+│   ├── annotator.js          # Fabric.js screenshot annotator (box/arrow/text/pen)
+│   └── seeds-forms.css       # shared look for both forms, matching joyfuleffort.com/seeds
 ├── functions/
 │   └── api/
 │       ├── feedback.js       # Pages Function → POST /api/feedback
