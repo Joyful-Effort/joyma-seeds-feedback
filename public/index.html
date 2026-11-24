@@ -6,118 +6,28 @@
 <title>Joyma Seeds — Submit Feedback</title>
 <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 <link rel="stylesheet" href="/fonts/dm-sans.css">
-<style>
-  :root{
-    --bg:#f6c945; --paper:#fbf8f1; --ink:#24211c; --muted:#625c51; --line:#e4dccb;
-    --teal:#24211c; --teal-soft:#8a8272; --plum:#4d4126; --gold:#f6c945; --leaf:#fcefc4;
-  }
-  *{box-sizing:border-box;margin:0;padding:0}
-  body{
-    font-family:"DM Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
-    background:var(--bg);
-    color:var(--ink); min-height:100vh; padding:40px 16px; display:flex; justify-content:center;
-  }
-  .wrap{width:min(680px,100%)}
-  .head{text-align:center;color:var(--paper);margin-bottom:26px}
-  .head h1{font-size:34px;letter-spacing:-.02em;margin-bottom:8px}
-  .head p{color:rgba(247,244,236,.8);font-size:16px;max-width:46ch;margin:0 auto}
-  .card{background:var(--paper);border-radius:20px;box-shadow:0 20px 60px rgba(36,33,28,.16);padding:34px 34px 30px}
-  label{display:block;font-weight:600;font-size:14px;color:var(--ink);margin:18px 0 7px}
-  label .req{color:var(--plum)}
-  .hint{font-weight:400;color:var(--muted);font-size:12.5px;margin-left:6px}
-  input[type=text],input[type=email],textarea,select{
-    width:100%;border:1px solid var(--line);border-radius:11px;padding:12px 14px;font-size:16px;
-    font-family:inherit;color:var(--ink);background:#fff;transition:.15s;-webkit-appearance:none;appearance:none
-  }
-  select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23625c51' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
-    background-repeat:no-repeat;background-position:right 14px center;padding-right:38px}
-  input:focus,textarea:focus,select:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 3px rgba(36,33,28,.15)}
-  input.invalid,textarea.invalid,select.invalid{border-color:#c0564f;box-shadow:0 0 0 3px rgba(192,86,79,.14)}
-  input.invalid:focus,textarea.invalid:focus,select.invalid:focus{border-color:#c0564f;box-shadow:0 0 0 3px rgba(192,86,79,.22)}
-  .field-error{display:none;color:#a23b3b;font-size:12.5px;margin-top:6px}
-  .field-error.on{display:block}
-  textarea{min-height:120px;resize:vertical}
-  .types{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:6px}
-  .types label{margin:0;cursor:pointer;display:block;position:relative}
-  .types input{position:absolute;opacity:0;width:0;height:0;margin:0;pointer-events:none}
-  .types .opt{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;
-    min-height:76px;border:1px solid var(--line);border-radius:12px;padding:14px 10px;text-align:center;
-    background:#fff;transition:.15s;font-weight:600;font-size:14px;color:var(--muted)}
-  .types .opt .em{font-size:20px;line-height:1}
-  .types input:checked + .opt{border-color:var(--teal);background:var(--leaf);color:var(--teal);box-shadow:0 0 0 3px rgba(36,33,28,.12)}
-  .types input:focus-visible + .opt{border-color:var(--teal);box-shadow:0 0 0 3px rgba(36,33,28,.25)}
-  .row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-  .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
-  .actions{margin-top:24px;display:flex;flex-direction:column;gap:14px;align-items:center}
-  button{
-    background:var(--teal);color:#fff;border:none;border-radius:12px;padding:14px 30px;font-size:16px;
-    font-weight:600;cursor:pointer;transition:.15s;width:100%
-  }
-  button:hover{background:#ecbb2c}
-  button:disabled{opacity:.55;cursor:not-allowed}
-  .msg{border-radius:12px;padding:14px 16px;font-size:15px;line-height:1.5;display:none;margin-top:16px}
-  .msg.ok{display:block;background:var(--leaf);border:1px solid #f1d77e;color:var(--teal)}
-  .msg.err{display:block;background:#fbeaea;border:1px solid #eecaca;color:#a23b3b}
-  .foot{color:rgba(247,244,236,.6);font-size:12.5px;text-align:center;margin-top:20px}
-  .foot a{color:var(--gold)}
-  .dropzone{border:1.5px dashed var(--line);border-radius:12px;padding:20px;text-align:center;color:var(--muted);
-    background:#fff;cursor:pointer;font-size:14px;transition:.15s;margin-top:6px}
-  .dropzone:hover,.dropzone.hover{border-color:var(--teal);color:var(--teal);background:var(--leaf)}
-   .editor{display:none;margin-top:10px}
-   .editor.on{display:block}
-    .toolbar{display:flex;flex-direction:column;gap:0;align-items:stretch;margin-bottom:10px;padding:10px;
-      border:1px solid var(--line);border-radius:12px;background:#fff}
-    .toolbar-group{display:flex;align-items:center;gap:12px;min-height:36px}
-    .toolbar-group + .toolbar-group{border-top:1px solid var(--line);padding-top:10px;margin-top:10px}
-    .toolbar-label{color:var(--muted);font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
-    .tool-controls,.swatches{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
-    .tool{width:auto;min-height:36px;display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:#fff;border-radius:8px;padding:7px 10px;font-size:13px;
-      font-weight:600;color:var(--muted);cursor:pointer;transition:background .15s,border-color .15s,color .15s}
-    .tool svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-linecap:round;stroke-linejoin:round;stroke-width:1.8}
-    .tool.on{border-color:var(--teal);background:var(--leaf);color:var(--teal)}
-    .tool:hover{border-color:var(--teal);background:var(--leaf);color:var(--teal)}
-   .tool:focus-visible,.swatch:focus-visible{outline:none;box-shadow:0 0 0 3px rgba(36,33,28,.25)}
-   .tool.danger{color:#a23b3b}
-   .tool.danger:hover{border-color:#c0564f;background:#fbeaea;color:#a23b3b}
-   .swatch{width:24px;height:24px;min-height:24px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1px var(--line);cursor:pointer;padding:0}
-   .swatch.on{box-shadow:0 0 0 2px var(--teal)}
-  .canvas-wrap{border:1px solid var(--line);border-radius:12px;overflow:auto;background:#f5f0e4;padding:6px;max-height:440px}
-  .editor .tip{color:var(--muted);font-size:12px;margin-top:8px}
-  @media(max-width:600px){
-    body{padding:24px 12px}
-    .head h1{font-size:27px}
-    .head p{font-size:15px}
-    .card{padding:22px 18px;border-radius:16px}
-    .row{grid-template-columns:1fr}
-    .types{grid-template-columns:1fr 1fr 1fr;gap:8px}
-     .types .opt{min-height:66px;padding:11px 6px;font-size:13px}
-     .types .opt .em{font-size:18px}
-      .toolbar{gap:0;padding:8px}
-      .toolbar-group{width:100%;flex-direction:column;align-items:flex-start;gap:6px}
-      .toolbar-group + .toolbar-group{padding-top:8px;margin-top:8px}
-     .tool-controls,.swatches{justify-content:flex-start}
-   }
-  @media(max-width:380px){.types{grid-template-columns:1fr}}
-
-  /* Joyma Seeds look, matching joyfuleffort.com/seeds: sunshine yellow, ivory neutrals, DM Sans, no gradients */
-  h1,h2,h3,h4{font-weight:600}
-  .head{color:var(--ink)}
-  .head p{color:#3a352d}
-  .head .pill{border-color:rgba(36,33,28,.2);color:#3a352d;background:rgba(255,255,255,.4)}
-  button{background:var(--gold);color:var(--ink);font-family:inherit}
-  .foot{color:rgba(36,33,28,.72)}
-  .foot a{color:var(--ink);text-decoration-color:var(--ink)}
-  a{color:var(--ink)}
-</style>
+<link rel="stylesheet" href="/seeds-forms.css">
+<link rel="icon" href="https://joyfuleffort.com/favicon.svg" type="image/svg+xml">
 </head>
 <body>
-<div class="wrap">
-  <div class="head">
-    <h1>Share your feedback</h1>
-    <p>Spotted a bug, want a feature, or have an idea to make Joyma easier? Tell us here. Every submission reaches the team.</p>
+<div class="topbar">
+  <div class="bar">
+    <a class="logo" href="https://joyfuleffort.com/seeds">joyma</a>
+    <nav class="topnav" aria-label="Joyma Seeds">
+      <a href="https://joyfuleffort.com/seeds">Seeds hub</a>
+      <a href="/centres">For centers</a>
+      <a href="/" class="accent" aria-current="page">Send feedback</a>
+    </nav>
   </div>
+</div>
 
-  <div class="card">
+<main class="hero">
+  <div class="wrap">
+    <span class="eyebrow">Joyma Seeds</span>
+    <h1>Share your feedback</h1>
+    <p class="sub">Spotted a bug, want a feature, or have an idea to make Joyma easier? Tell us here. Every submission reaches the team.</p>
+
+  <div class="panel">
     <form id="fbform" novalidate>
       <label>What kind of feedback is this? <span class="req">*</span></label>
       <div class="types">
@@ -187,12 +97,16 @@
       <div class="msg" id="msg"></div>
     </form>
   </div>
+  </div>
+</main>
 
-  <div class="foot">
-    Prefer to talk it through? Reach João or Lauren in the <a href="https://galaxy.metaprovide.org/call/xzfrt5aj" target="_blank" rel="noopener">Galaxy channel</a>.<br>
+<footer>
+  <div class="footin">
+    <strong>Joyma Seeds</strong> &middot; the centers who shape Joyma while we build it<br>
+    Prefer to talk it through? Reach Jo&atilde;o or Lauren in the <a href="https://galaxy.metaprovide.org/call/xzfrt5aj" target="_blank" rel="noopener">Galaxy channel</a>.<br>
     Run a center and want to offer it through Joyma? <a href="/centres">Tell us about your center</a>.
   </div>
-</div>
+</footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.1/fabric.min.js"></script>
 <script src="/annotator.js" defer></script>

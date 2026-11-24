@@ -123,7 +123,7 @@
     COLORS.forEach((c) => {
       const s = document.createElement("button");
       s.type = "button"; s.className = "swatch" + (c === color ? " on" : "");
-      s.style.background = c; s.dataset.color = c; s.setAttribute("aria-label", `Use ${c} annotation colour`);
+      s.style.background = c; s.dataset.color = c; s.setAttribute("aria-label", `Use ${c} annotation color`);
       s.setAttribute("aria-pressed", String(c === color));
       s.addEventListener("click", () => setColor(c));
       els.swatches.appendChild(s);
@@ -132,9 +132,9 @@
     const colorGroup = document.createElement("div");
     colorGroup.className = "toolbar-group";
     colorGroup.setAttribute("role", "group");
-    colorGroup.setAttribute("aria-label", "Annotation colour");
+    colorGroup.setAttribute("aria-label", "Annotation color");
     const colorLabel = document.createElement("span");
-    colorLabel.className = "toolbar-label"; colorLabel.textContent = "Colour";
+    colorLabel.className = "toolbar-label"; colorLabel.textContent = "Color";
     colorGroup.append(colorLabel, els.swatches);
     els.toolbar.appendChild(colorGroup);
 

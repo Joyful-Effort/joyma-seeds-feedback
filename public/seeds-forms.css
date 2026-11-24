@@ -1,0 +1,222 @@
+/*
+ * Shared look for the Joyma Seeds intake forms (/ and /centres), matching the Seeds hub at
+ * joyfuleffort.com/seeds: sunshine yellow and ivory bands, near-black ink, DM Sans, square corners,
+ * flat surfaces, and the hub's hand-drawn frame and rule (paths from the joyful-effort-site
+ * src/lib/hand-paths.ts, frame variant 1 and horizontal rule 1).
+ */
+:root{
+    --sunshine:#f6c945; --sunshine-hover:#ecbb2c; --ivory:#fbf8f1; --ink:#24211c;
+    --text-muted:#625c51; --secondary:#4d4126; --muted:#f1ebdd;
+    --field-border:rgba(36,33,28,.32); --border:rgba(36,33,28,.12);
+    --error:#a23b3b; --error-soft:#fbeaea;
+    --hand-frame:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%22-1.5%20-1.5%20103%20103%22%20preserveAspectRatio%3D%22none%22%3E%3Cpath%20fill%3D%22none%22%20stroke%3D%22%2324211c%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20vector-effect%3D%22non-scaling-stroke%22%20d%3D%22M-0.4%200.9%20C%2025%201.6%2C%2060%200.4%2C%2099.6%201.2%20M99.1%200.2%20C%20100%2035%2C%2098.9%2066%2C%2099.6%20100.6%20M99.9%2098.9%20C%2065%2099.6%2C%2035%2098.4%2C%200.3%2099.3%20M0.8%2099.9%20C%200.2%2064%2C%201.3%2036%2C%200.5%20-0.3%22%2F%3E%3C%2Fsvg%3E");
+    --hand-fill:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%22-1.5%20-1.5%20103%20103%22%20preserveAspectRatio%3D%22none%22%3E%3Cpath%20d%3D%22M0.5%200.9%20C%2025%201.6%2C%2060%200.4%2C%2099.1%201.2%20C%20100%2035%2C%2098.9%2066%2C%2099.6%2098.9%20C%2065%2099.6%2C%2035%2098.4%2C%200.8%2099.3%20C%200.2%2064%2C%201.3%2036%2C%200.5%200.9%20Z%22%2F%3E%3C%2Fsvg%3E");
+    --hand-rule:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%20-1%20100%204%22%20preserveAspectRatio%3D%22none%22%3E%3Cpath%20fill%3D%22none%22%20stroke%3D%22%2324211c%22%20stroke-width%3D%221.75%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20vector-effect%3D%22non-scaling-stroke%22%20d%3D%22M0%200.6%20C%2030%201.6%2C%2050%200.2%2C%2075%201.2%20S%2092%200.4%2C%20100%201.2%22%2F%3E%3C%2Fsvg%3E");
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{
+    font-family:"DM Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+    background:var(--ivory);color:var(--ink);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;
+}
+a{color:var(--ink);text-underline-offset:3px}
+h1,h2,h3,h4{font-weight:600}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+
+/* ============ header, as on the hub ============ */
+.topbar{
+    position:sticky;top:0;z-index:40;background:rgba(251,248,241,.95);
+    border-bottom:1px solid var(--border);backdrop-filter:blur(8px);
+}
+.bar{
+    max-width:1180px;margin:0 auto;padding:10px 24px;min-height:80px;
+    display:flex;align-items:center;justify-content:space-between;gap:10px 18px;flex-wrap:wrap;
+}
+.logo{text-decoration:none;font-size:28px;font-weight:600;color:var(--ink);letter-spacing:-.02em;line-height:1}
+.topnav{display:flex;align-items:center;gap:4px 18px;flex-wrap:wrap}
+.topnav a{
+    color:var(--ink);text-decoration:none;font-size:15px;font-weight:500;
+    padding:10px 2px;white-space:nowrap;text-underline-offset:6px;
+}
+.topnav a:hover,.topnav a.current{text-decoration:underline;text-decoration-thickness:1.5px}
+.topnav a.accent{background:var(--sunshine);padding:10px 18px;margin-left:6px}
+.topnav a.accent:hover{text-decoration:none;background:var(--sunshine-hover)}
+
+/* ============ hero band: yellow, with the form panel sitting on it ============ */
+.hero{background:var(--sunshine);padding:60px 0 72px}
+.eyebrow{
+    display:block;font-size:13px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--secondary);margin-bottom:12px;
+}
+h1{
+    font-size:clamp(38px,5.4vw,64px);color:var(--ink);letter-spacing:-.025em;line-height:1.05;margin-bottom:18px;
+}
+.hero .wrap > .sub{font-size:16.5px;color:var(--secondary);max-width:64ch}
+.hero .wrap > .sub + .sub{margin-top:10px}
+.tags{display:flex;flex-wrap:wrap;gap:6px 0;margin-top:20px}
+.tags span{
+    font-size:13px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--secondary);
+    padding:0 14px;border-left:1.5px solid var(--ink);line-height:1.3;
+}
+.tags span:first-child{padding-left:0;border-left:0}
+
+/* ============ the form panel, in a hand-drawn frame ============ */
+.panel{
+    position:relative;isolation:isolate;max-width:820px;margin-top:36px;padding:34px 36px 32px;
+}
+.panel::before,.panel::after{content:"";position:absolute;inset:-1.5%;pointer-events:none}
+/* The ivory is painted through the frame's filled outline, so it stays inside the hand-drawn strokes. */
+.panel::before{
+    z-index:-1;background:var(--ivory);
+    -webkit-mask:var(--hand-fill) 0 0/100% 100% no-repeat;mask:var(--hand-fill) 0 0/100% 100% no-repeat;
+}
+.panel::after{background:var(--hand-frame) 0 0/100% 100% no-repeat}
+.lead{
+    position:relative;color:var(--text-muted);font-size:15.5px;padding-bottom:22px;margin-bottom:4px;
+}
+.lead::after{
+    content:"";position:absolute;left:0;right:0;bottom:-2px;height:4px;
+    background:var(--hand-rule) 0 0/100% 100% no-repeat;
+}
+
+/* ============ fields: square and flat ============ */
+label{display:block;font-weight:600;font-size:14.5px;color:var(--ink);margin:20px 0 7px}
+label .req{color:var(--secondary)}
+.hint{font-weight:400;color:var(--text-muted);font-size:13px;margin-left:6px}
+input[type=text],input[type=email],input[type=url],textarea,select{
+    width:100%;border:1.5px solid var(--field-border);border-radius:0;padding:11px 14px;font-size:16px;
+    font-family:inherit;color:var(--ink);background:#fff;transition:border-color .15s,box-shadow .15s;
+    -webkit-appearance:none;appearance:none;
+}
+input::placeholder,textarea::placeholder{color:#8a8272}
+select{
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='none' stroke='%2324211c' stroke-width='1.6' stroke-linecap='round' d='M1 1.5l5 5 5-5'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;background-position:right 14px center;padding-right:38px;
+}
+input:hover,textarea:hover,select:hover{border-color:rgba(36,33,28,.55)}
+input:focus,textarea:focus,select:focus{outline:none;border-color:var(--ink);box-shadow:0 0 0 3px var(--sunshine)}
+input.invalid,textarea.invalid,select.invalid{border-color:#c0564f}
+input.invalid:focus,textarea.invalid:focus,select.invalid:focus{box-shadow:0 0 0 3px rgba(192,86,79,.25)}
+.field-error{display:none;color:var(--error);font-size:13px;margin-top:6px}
+.field-error.on{display:block}
+textarea{min-height:120px;resize:vertical}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+
+/* ============ choice tiles: square, sunshine when chosen ============ */
+.types{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:6px}
+.types label{margin:0;cursor:pointer;display:block;position:relative}
+.types input{position:absolute;opacity:0;width:0;height:0;margin:0;pointer-events:none}
+.types .opt{
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;min-height:76px;
+    border:1.5px solid var(--field-border);padding:14px 10px;text-align:center;background:#fff;
+    transition:background-color .15s,border-color .15s;font-weight:600;font-size:14.5px;color:var(--ink);
+}
+.types .opt .em{font-size:20px;line-height:1}
+.types .opt .sub{font-weight:400;font-size:13px;color:var(--text-muted);line-height:1.35}
+.types label:hover .opt{border-color:var(--ink)}
+.types input:checked + .opt{border-color:var(--ink);background:var(--sunshine)}
+.types input:checked + .opt .sub{color:var(--secondary)}
+.types input:focus-visible + .opt{outline:3px solid var(--ink);outline-offset:2px}
+.types.wide{grid-template-columns:repeat(2,1fr)}
+.types.wide .opt{align-items:flex-start;text-align:left;min-height:82px;padding:14px}
+
+.checks{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:6px}
+.checks label{
+    margin:0;display:flex;align-items:center;gap:10px;font-weight:500;font-size:14.5px;
+    border:1.5px solid var(--field-border);padding:11px 13px;background:#fff;cursor:pointer;
+    transition:background-color .15s,border-color .15s;
+}
+.checks label:hover{border-color:var(--ink)}
+.checks label:has(input:checked){border-color:var(--ink);background:var(--sunshine);font-weight:600}
+.checks input{width:16px;height:16px;accent-color:var(--ink);flex:none;margin:0}
+.consent{display:flex;gap:10px;align-items:flex-start;margin-top:24px;font-size:14px;font-weight:400;color:var(--text-muted);line-height:1.5}
+.consent input{width:17px;height:17px;accent-color:var(--ink);flex:none;margin-top:2px}
+
+/* ============ button, as the hub's solid button ============ */
+.actions{margin-top:26px;display:flex;flex-direction:column;align-items:flex-start;gap:14px}
+button[type=submit]{
+    background:var(--sunshine);color:var(--ink);border:0;border-radius:0;padding:13px 28px;
+    font-family:inherit;font-size:16px;font-weight:500;cursor:pointer;
+}
+button[type=submit]:hover{background:var(--sunshine-hover)}
+button[type=submit]:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+button[type=submit]:disabled{opacity:.55;cursor:not-allowed}
+@media (prefers-reduced-motion:no-preference){
+    button[type=submit]{transition:background-color .2s,transform .2s,box-shadow .2s}
+    button[type=submit]:not(:disabled):hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 0 var(--ink)}
+    button[type=submit]:not(:disabled):active{transform:none;box-shadow:none;transition-duration:80ms}
+}
+
+/* ============ messages ============ */
+.msg{padding:14px 16px;font-size:15px;line-height:1.5;display:none;margin-top:18px}
+.msg.ok{display:block;background:var(--sunshine);border-left:3px solid var(--ink);color:var(--ink)}
+.msg.err{display:block;background:var(--error-soft);border-left:3px solid var(--error);color:var(--error)}
+
+.done{display:none;padding:4px 0}
+.done.on{display:block}
+.done h2{font-size:clamp(26px,3.2vw,34px);letter-spacing:-.015em;line-height:1.15;margin-bottom:12px}
+.done p{color:var(--text-muted);font-size:15.5px;max-width:56ch}
+.done p + p{margin-top:8px}
+
+/* ============ screenshot picker and annotator (annotator.js) ============ */
+.dropzone{
+    border:1.5px dashed var(--field-border);padding:22px;text-align:center;color:var(--text-muted);
+    background:#fff;cursor:pointer;font-size:14.5px;transition:border-color .15s,background-color .15s,color .15s;margin-top:6px;
+}
+.dropzone:hover,.dropzone.hover{border-color:var(--ink);color:var(--ink);background:var(--muted)}
+.editor{display:none;margin-top:10px}
+.editor.on{display:block}
+.toolbar{
+    display:flex;flex-direction:column;align-items:stretch;margin-bottom:10px;padding:10px;
+    border:1.5px solid var(--field-border);background:#fff;
+}
+.toolbar-group{display:flex;align-items:center;gap:12px;min-height:36px}
+.toolbar-group + .toolbar-group{border-top:1px solid var(--border);padding-top:10px;margin-top:10px}
+.toolbar-label{color:var(--secondary);font-size:11.5px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;min-width:52px}
+.tool-controls,.swatches{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.tool{
+    min-height:36px;display:inline-flex;align-items:center;gap:6px;border:1.5px solid var(--field-border);
+    background:#fff;border-radius:0;padding:6px 10px;font-family:inherit;font-size:13.5px;font-weight:500;color:var(--ink);
+    cursor:pointer;transition:background-color .15s,border-color .15s,color .15s;
+}
+.tool svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-linecap:round;stroke-linejoin:round;stroke-width:1.8}
+.tool:hover{border-color:var(--ink)}
+.tool.on{border-color:var(--ink);background:var(--sunshine)}
+.tool:focus-visible,.swatch:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+.tool.danger{color:var(--error)}
+.tool.danger:hover{border-color:var(--error);background:var(--error-soft)}
+.swatch{width:24px;height:24px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1px var(--field-border);cursor:pointer;padding:0}
+.swatch.on{box-shadow:0 0 0 2px var(--ink)}
+.canvas-wrap{border:1.5px solid var(--field-border);overflow:auto;background:var(--muted);padding:6px;max-height:440px}
+.editor .tip{color:var(--text-muted);font-size:13px;margin-top:8px}
+
+/* ============ footer, as on the hub ============ */
+footer{background:var(--ivory)}
+.footin{
+    position:relative;max-width:1132px;margin:0 auto;padding:30px 0 40px;text-align:center;
+    color:var(--text-muted);font-size:14px;line-height:1.9;
+}
+.footin::before{
+    content:"";position:absolute;left:0;right:0;top:-2px;height:4px;
+    background:var(--hand-rule) 0 0/100% 100% no-repeat;
+}
+.footin strong{color:var(--ink)}
+
+@media (max-width:640px){
+    .bar{padding:14px 18px;justify-content:center}
+    .topnav{justify-content:center;gap:0 14px}
+    .wrap{padding:0 18px}
+    .footin{margin:0 18px}
+    .hero{padding:36px 0 48px}
+    .panel{padding:24px 20px 24px;margin-top:28px}
+    .row,.checks,.types.wide{grid-template-columns:1fr}
+    .types{gap:8px}
+    .types .opt{min-height:66px;padding:11px 6px;font-size:13.5px}
+    .types.wide .opt{min-height:auto;padding:12px 14px}
+    .toolbar{padding:8px}
+    .toolbar-group{flex-direction:column;align-items:flex-start;gap:6px}
+    .toolbar-group + .toolbar-group{padding-top:8px;margin-top:8px}
+}
+@media (max-width:380px){.types{grid-template-columns:1fr}}
